@@ -42,9 +42,9 @@ Type a question in the textarea.
 
 Click Ask.
 
-The answer will appear in the stylized answer box.
 **Place the LLaMA model** in the `backend/models/` directory:
 ```bash
 backend/models/llama-3.2-1b-instruct-q4_k_m.gguf
+
 
 
