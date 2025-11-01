@@ -1,0 +1,82 @@
+Road Hazard Detection & Real-Time Alerts
+Newbietech
+October 13, 2025
+Brief Description of the Idea / Solution
+Indian roads often expose drivers to unmarked speed breakers, potholes, stalled vehicles, and
+debris, posing a constant safety risk. Our solution leverages computer vision and geospatial
+technologies to detect road hazards in near real-time. The system captures video frames
+from dashcams, street cameras, or smartphones, detects hazards using deep learning models,
+automatically blurs faces and license plates to ensure privacy, and geotags each event. Using
+the Haversine formula, the system calculates distances between hazards and vehicles to
+eliminate duplicate alerts.
+All detected hazards are dynamically maintained in a central database. If a hazard (e.g.,
+pothole) is removed from the road, it is automatically removed from the database unless a
+new hazard appears at the same location. Users can also report hazards through a portal by
+uploading a photo along with latitude and longitude coordinates. This ensures continuous
+real-time monitoring and database updating for accurate and reliable hazard information.
+Additionally, all hazards are visualized on a GIS mapusing OpenStreetMap (OSM)for
+navigation, monitoring, and analytics.
+Technology Stack Being Used
+• Video Capture & Processing:Dashcam, Smartphone, Street Cameras, OpenCV,
+FFmpeg
+• Computer Vision: YOLOv8 / EfficientDet / Detectron2
+• Privacy: OpenCV for face and license plate blurring
+• Backend & API:FastAPI / Flask / Node.js
+• Real-Time Messaging: WebSockets, Firebase Cloud Messaging
+• Geospatial Calculations: Python geopy, haversine formula
+• GIS Mapping: OpenStreetMap (OSM), Leaflet.js / Mapbox
+• Frontend / Mobile:React Native / Flutter
+1• Database: PostgreSQL / MongoDB for dynamic hazard storage
+• User Portal: Web interface for manual hazard reporting with photo + GPS
+Impact of the Solution / Unique Selling Point (USP)
+• Real-time hazard alerts for drivers to avoid accidents
+• Privacy-preserving via automatic blurring of faces and license plates
+• Duplicate-free notifications using Haversine distance filtering
+• Low-latency edge and cloud processing
+• Dynamic database updates: hazards removed from the road are automatically deleted
+unless a new hazard appears
+• User-submitted hazard reporting via portal with GPS and photo
+• GIS visualization using OpenStreetMap for navigation, monitoring, and analytics
+• Scalable data-driven insights for road maintenance
+Haversine Formula for Distance Calculation
+The distance d between two points on Earth with coordinates ( ϕ1, λ1) and (ϕ2, λ2) is calcu-
+lated as:
+d = 2r · arcsin
+ r
+sin2
+∆ϕ
+2
+
++ cosϕ1 · cos ϕ2 · sin2
+∆λ
+2
+!
+where:
+• r = 6371 km is the Earth’s radius
+• ∆ϕ = ϕ2 − ϕ1
+• ∆λ = λ2 − λ1
+2System Architecture Diagram
+Dashcam / Smartphone / Street Camera
+Frame Extraction & Preprocessing
+CV Model: Hazard Detection + Blurring
+Geotagging + Haversine Filtering
+Backend / Cloud Server
+Dynamic Hazard Database
+(Add / Remove / Update)
+Real-Time Alerts
+to Nearby Drivers
+GIS Map Visualization
+using OpenStreetMap (OSM)
+User Portal: Upload Photo + GPS
+for Hazard Reporting
+Training Data for Hazard Detection
+Currently, publicly available datasets for road hazards are limited. Options for training
+YOLOv8 or similar models include:
+• Pothole Datasets: Kaggle and GitHub datasets containing annotated potholes.
+• Road Damage Detection Dataset (RDD2020):Annotated cracks, potholes, and
+road damages (used in competitions).
+• Custom Dashcam / User-Submitted Data:Images uploaded via portal or dash-
+cam footage can be labeled for training.
+• Synthetic Data Augmentation: Overlay potholes, debris, or speed breakers on
+clean road images to increase training diversity.
+3

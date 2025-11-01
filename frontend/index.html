@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>📘 Local PDF Chatbot</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h2>📘 Local PDF Chatbot</h2>
+
+  <form id="uploadForm" enctype="multipart/form-data">
+    <input type="file" name="file" accept=".pdf" required>
+    <button type="submit">Upload PDF</button>
+  </form>
+
+  <textarea id="question" placeholder="Ask your question..." rows="3"></textarea>
+  <button id="askBtn">Ask</button>
+
+  <pre id="answer"></pre>
+
+  <script>
+    const answerBox = document.getElementById('answer');
+
+    document.getElementById('uploadForm').onsubmit = async (e) => {
+      e.preventDefault();
+      const formData = new FormData(e.target);
+      answerBox.textContent = "⏳ Uploading...";
+      try {
+        const res = await fetch('/api/upload', { method: 'POST', body: formData });
+        const data = await res.json();
+        answerBox.textContent = `✅ ${data.message} (${data.text_length} chars extracted)`;
+      } catch (err) {
+        answerBox.textContent = "❌ Upload failed: " + err.message;
+      }
+    };
+
+    document.getElementById('askBtn').onclick = async () => {
+      const question = document.getElementById('question').value.trim();
+      if (!question) {
+        answerBox.textContent = "⚠️ Please enter a question.";
+        return;
+      }
+      const formData = new FormData();
+      formData.append('question', question);
+      answerBox.textContent = "🤔 Thinking...";
+      try {
+        const res = await fetch('/api/ask', { method: 'POST', body: formData });
+        const data = await res.json();
+        answerBox.textContent = "💬 " + data.answer;
+      } catch (err) {
+        answerBox.textContent = "❌ Error: " + err.message;
+      }
+    };
+  </script>
+</body>
+</html>
