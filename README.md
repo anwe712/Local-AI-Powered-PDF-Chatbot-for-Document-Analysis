@@ -43,8 +43,10 @@ Type a question in the textarea.
 Click Ask.
 
 **Place the LLaMA model** in the `backend/models/` directory:
+download the model from here - https://huggingface.co/hugging-quants/Llama-3.2-1B-Instruct-Q4_K_M-GGUF/resolve/main/llama-3.2-1b-instruct-q4_k_m.gguf
 ```bash
 backend/models/llama-3.2-1b-instruct-q4_k_m.gguf
+
 
 
 
